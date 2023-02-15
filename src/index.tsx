@@ -22,6 +22,7 @@ let customFonts = {
   'Sora-700': require('../assets/fonts/Sora-Bold.ttf'),
   'Sora-800': require('../assets/fonts/Sora-ExtraBold.ttf'),
   'Sintony': require('../assets/fonts/Sintony-Regular.ttf'),
+  'Sitara': require('../assets/fonts/Sitara-Regular.ttf'),
 };
 
 class Index extends React.Component {

@@ -13,7 +13,7 @@ interface IProps {
   type?: React.ComponentProps<typeof TextInput>['textContentType'],
   autoCapitalize?: React.ComponentProps<typeof TextInput>['autoCapitalize'];
   value?: string;
-  onChange?: () => string;
+  onChange?: (value: string) => void;
 }
 
 const Input: React.FC<IProps> = ({ placeholder, label, error, mb, type, autoCapitalize, onChange }) => {
