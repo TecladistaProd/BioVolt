@@ -1,18 +1,12 @@
 import React from 'react';
-import { View, Text } from 'react-native';
 import { enableFreeze } from 'react-native-screens';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Login from './screen/public/SignIn';
 
 enableFreeze(true);
 
 const Stack = createNativeStackNavigator();
-
-const Test = () => (
-  <View style={{flex: 1, backgroundColor: '#333', alignItems: 'center', justifyContent: 'center'}}>
-    <Text style={{ fontSize: 30, color: '#fff' }}>Hello World</Text>
-  </View>
-)
 
 const Routes: React.FC = () => {
   return (
@@ -21,8 +15,8 @@ const Routes: React.FC = () => {
         screenOptions={{
           headerShown: false
         }}
-        initialRouteName="Home">
-        <Stack.Screen name="Home" component={Test} />
+        initialRouteName="Login">
+        <Stack.Screen name="Login" component={Login} />
       </Stack.Navigator>
     </NavigationContainer>
   );
