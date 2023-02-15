@@ -28,7 +28,7 @@ const PageWrapper: React.FC<IProps> = ({ children, hasNav, hasBack, title }) => 
           </NavBar>
         )
       }
-      <Content>
+      <Content {...{hasNav}}>
         {children}
       </Content>
     </Container>

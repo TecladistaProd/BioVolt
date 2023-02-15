@@ -50,6 +50,13 @@ const theme = {
      */
     lightCoral: "#EE8688",
   },
+
+  radius: {
+    /**
+     * 4px
+     */
+    sm: "4px",
+  },
 };
 
 export default theme;

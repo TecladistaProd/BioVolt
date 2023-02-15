@@ -24,7 +24,7 @@ export const Content = styled.View<{ hasNav?: boolean }>`
   flex: 1;
   ${({ theme, hasNav }) => css`
     background-color: ${theme.colors.pureWhite};
-    padding-top: ${hasNav ? 20 : 0}px;
+    padding-top: ${!!hasNav ? 20 : 0}px;
     padding-horizontal: 20px;
   `}
 `;
