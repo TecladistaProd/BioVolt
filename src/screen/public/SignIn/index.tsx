@@ -1,18 +1,21 @@
 import React, { useCallback } from 'react';
+import Toast from 'react-native-toast-message';
 import { useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
 
-import signinSchema from '@yupSchemas/signin.schema';
+import {signinSchema} from '@yupSchemas/user.schema';
 
 import PageWrapper from '@components/PageWrapper';
 import Input from '@components/Input';
 import Button from '@components/Button';
 
-import { Title, SignupRow, SignupText, SignupBtn } from './styles';
-import { LOGIN_USER } from '@store/types';
-import Toast from 'react-native-toast-message';
+import { SIGNIN_USER } from '@store/types';
 
-const Login: React.FC = () => {
+import { PublicSSP } from '@interfaces/screen';
+
+import { Title, SignupRow, SignupText, SignupBtn } from './styles';
+
+const SignIn: React.FC<PublicSSP<'SignIn'>> = ({ navigation }) => {
   const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
@@ -32,11 +35,11 @@ const Login: React.FC = () => {
           text1: json.message,
         });
       }
-      dispatch({ type: LOGIN_USER, payload: res });
+      dispatch({ type: SIGNIN_USER, payload: json });
     }
   });
 
-  const handleChangeInput = useCallback((name: string, value: string) => {
+  const handleChangeInput = useCallback((name: keyof typeof formik.values, value: string) => {
     formik.setFieldValue(name, value || '');
   }, [formik]);
 
@@ -48,6 +51,7 @@ const Login: React.FC = () => {
       <Input
         label='E-mail'
         placeholder='example@email.com'
+        autoComplete='email'
         mb='20px'
         type='emailAddress'
         error={formik.errors.email}
@@ -75,7 +79,7 @@ const Login: React.FC = () => {
         <SignupText>
           Don’t have an account?
         </SignupText>
-        <SignupBtn>
+        <SignupBtn onPress={() => navigation.navigate('SignUp')}>
           <SignupText>Sign up</SignupText>
         </SignupBtn>
         <SignupText>
@@ -86,4 +90,4 @@ const Login: React.FC = () => {
   );
 }
 
-export default Login;
+export default SignIn;

@@ -7,11 +7,14 @@ module.exports = function(api) {
         'module-resolver',
         {
           alias: {
+            'src': './src',
             '@assets': './assets',
             '@components': './src/components',
             '@yupSchemas': './src/yupSchemas',
             '@screen': './src/screen',
-            '@store': './src/store'
+            '@store': './src/store',
+            '@interfaces': './src/interfaces',
+            '@utils': './src/utils'
           }
         }
       ]

@@ -9,7 +9,7 @@ export const Label = styled.Text`
   margin-bottom: 5px;
   font-size: 11px;
   font-family: "Sintony";
-  color: ${({ theme }) => theme.colors.gray_3};
+  color: ${({ theme }) => theme.colors.gray_4};
 `;
 
 export const FieldContainer = styled.View`
@@ -25,7 +25,7 @@ export const FieldContainer = styled.View`
 `;
 
 export const TextField = styled.TextInput.attrs(({ theme }) => ({
-  placeholderTextColor: theme.colors.gray_2,
+  placeholderTextColor: theme.colors.gray_3,
 }))`
   width: 100%;
   height: 48px;

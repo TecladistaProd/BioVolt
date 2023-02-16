@@ -20,7 +20,7 @@ export const NavBar = styled.View`
   `}
 `;
 
-export const Content = styled.View<{ hasNav?: boolean }>`
+export const Content = styled.ScrollView<{ hasNav?: boolean }>`
   flex: 1;
   ${({ theme, hasNav }) => css`
     background-color: ${theme.colors.pureWhite};
@@ -33,4 +33,8 @@ export const Title = styled.Text`
   font-family: "Sora-600";
   color: ${({ theme }) => theme.colors.pureBlack};
   font-size: 17px;
+`;
+
+export const CenterView = styled.View`
+  flex-direction: row;
 `;

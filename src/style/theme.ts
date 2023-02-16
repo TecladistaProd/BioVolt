@@ -13,17 +13,21 @@ const theme = {
      */
     gray_1: "#F4F4F4",
     /**
+     * #e6e6e6
+     */
+    gray_2: "#e6e6e6",
+    /**
      * #cfcfcf
      */
-    gray_2: "#CFCFCF",
+    gray_3: "#CFCFCF",
     /**
      * #a0a0a0
      */
-    gray_3: "#A0A0A0",
+    gray_4: "#A0A0A0",
     /**
      * #808080
      */
-    gray_4: "#808080",
+    gray_5: "#808080",
 
     /**
      * #770fdf

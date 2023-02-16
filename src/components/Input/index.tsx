@@ -12,11 +12,12 @@ interface IProps {
   mb?: string;
   type?: React.ComponentProps<typeof TextInput>['textContentType'],
   autoCapitalize?: React.ComponentProps<typeof TextInput>['autoCapitalize'];
+  autoComplete?: React.ComponentProps<typeof TextInput>['autoComplete'];
   value?: string;
   onChange?: (value: string) => void;
 }
 
-const Input: React.FC<IProps> = ({ placeholder, label, error, mb, type, autoCapitalize, onChange }) => {
+const Input: React.FC<IProps> = ({ placeholder, label, error, mb, type, autoCapitalize, onChange, autoComplete }) => {
   const isPass = useMemo(() => !!(type && type.toLowerCase().match('password')), [type]);
   const [show, setShow] = useState(false);
   return (
@@ -31,6 +32,7 @@ const Input: React.FC<IProps> = ({ placeholder, label, error, mb, type, autoCapi
           autoCapitalize={autoCapitalize || 'none'}
           secureTextEntry={isPass && !show}
           onChangeText={onChange}
+          autoComplete={autoComplete}
         />
         {
           isPass && <EyeBtn onPress={setShow.bind(null, i => !i)}>
