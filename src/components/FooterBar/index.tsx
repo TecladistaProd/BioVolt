@@ -1,35 +1,44 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 
 import { Container, FooterBtn, FooterBtnLabel } from './styles';
 
 import Home from '@assets/icons/Home.svg';
 import Trade from '@assets/icons/Trade.svg';
 import Chart from '@assets/icons/Chart.svg';
+
+import { PrivateSSP, PrivateStackParamList } from '@interfaces/screen';
+
 import theme from 'src/style/theme';
-import { PrivateSSP } from '@interfaces/screen';
 
 interface IProps {
-  route: PrivateSSP<any>['route']
+  route: PrivateSSP<'Home' | 'FundDetails' | 'Portfolio' | 'Trade'>['route'];
+  navigation: PrivateSSP<'Home' | 'FundDetails' | 'Portfolio' | 'Trade'>['navigation'];
 }
 
-const FooterBar: React.FC<IProps> = ({ route }) => {
+const FooterBar: React.FC<IProps> = ({ route, navigation }) => {
+  const handleGoTo = useCallback((page: keyof PrivateStackParamList) => {
+    if(route.name !== page) {
+      navigation.navigate(page);
+    }
+  }, [route, navigation]);
+
   return (
     <Container>
-      <FooterBtn>
+      <FooterBtn onPress={handleGoTo.bind(null, 'Home')}>
         <Home fill={theme.colors[route.name === 'Home' ? 'primarySolid' : 'pureBlack']} width={24} height={24} />
         <FooterBtnLabel isSelected={route.name === 'Home'}>
           Home
         </FooterBtnLabel>
       </FooterBtn>
-      <FooterBtn>
-        <Trade fill={theme.colors[route.name === 'FundDetails' ? 'primarySolid' : 'pureBlack']} width={24} height={24} />
-        <FooterBtnLabel isSelected={route.name === 'FundDetails'}>
+      <FooterBtn onPress={handleGoTo.bind(null, 'Trade')}>
+        <Trade fill={theme.colors[['FundDetails', 'Trade'].includes(route.name) ? 'primarySolid' : 'pureBlack']} width={24} height={24} />
+        <FooterBtnLabel isSelected={['FundDetails', 'Trade'].includes(route.name)}>
           Trade
         </FooterBtnLabel>
       </FooterBtn>
-      <FooterBtn>
-        <Chart fill={theme.colors.pureBlack} width={24} height={24} />
-        <FooterBtnLabel>
+      <FooterBtn onPress={handleGoTo.bind(null, 'Portfolio')}>
+        <Chart fill={theme.colors[route.name === 'Portfolio' ? 'primarySolid' : 'pureBlack']} width={24} height={24} />
+        <FooterBtnLabel isSelected={route.name === 'Portfolio'}>
           Portfolio
         </FooterBtnLabel>
       </FooterBtn>

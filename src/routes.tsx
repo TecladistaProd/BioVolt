@@ -11,6 +11,7 @@ import SignIn from '@screen/public/SignIn';
 import SignUp from '@screen/public/SignUp';
 import Message from '@screen/public/Message';
 import Home from '@screen/private/Home';
+import VoidScreen from '@screen/private/VoidScreen/indext';
 
 enableFreeze(true);
 
@@ -38,6 +39,8 @@ const Routes: React.FC = () => {
             initialRouteName='Home'
             screenOptions={{ headerShown: false }}>
             <PrivateStack.Screen name="Home" component={Home} />
+            <PrivateStack.Screen name="Trade" component={VoidScreen} />
+            <PrivateStack.Screen name="Portfolio" component={VoidScreen} />
           </PrivateStack.Navigator>
         )
       }
