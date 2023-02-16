@@ -11,7 +11,9 @@ module.exports = function(api) {
             '@components': './src/components',
             '@yupSchemas': './src/yupSchemas',
             '@screen': './src/screen',
-            '@store': './src/store'
+            '@store': './src/store',
+            '@interfaces': './src/interfaces',
+            '@utils': './src/utils'
           }
         }
       ]

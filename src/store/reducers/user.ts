@@ -1,23 +1,23 @@
+import { IUserReducer } from "@interfaces/store";
 import { AnyAction } from "@reduxjs/toolkit";
-import { LOGIN_USER } from "../types";
+import { SIGNIN_USER } from "../types";
 
-const INITIAL_STATE = {
-  user: {
-    id: "",
-    token: "",
-    email: "",
-    first_name: "",
-    last_name: "",
-  },
+const INITIAL_STATE: IUserReducer = {
+  id: "",
+  token: "askdnasjnjnwe anjnasjnajnasaskdnajks adnasn",
+  email: "",
+  first_name: "",
+  last_name: "",
+  accept_terms: false,
 };
 
 interface IAction extends AnyAction {
-  payload?: Partial<typeof INITIAL_STATE>;
+  payload?: Partial<IUserReducer>;
 }
 
 function userReducer(state = INITIAL_STATE, action: IAction) {
   switch (action.type) {
-    case LOGIN_USER:
+    case SIGNIN_USER:
       return { ...state, ...action.payload };
     default:
       return state;
