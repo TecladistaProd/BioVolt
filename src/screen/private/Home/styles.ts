@@ -95,3 +95,7 @@ export const Title = styled.Text`
     color: ${theme.colors.pureBlack};
   `};
 `;
+
+export const FundsSeparator = styled.View`
+  width: 15px;
+`;

@@ -1,10 +1,11 @@
 import React, { useCallback } from 'react';
-import { TouchableOpacity } from 'react-native';
+import { TouchableOpacity, FlatList, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { useFocusEffect } from '@react-navigation/native';
 
 import FooterBar from '@components/FooterBar';
 import PageWrapper from '@components/PageWrapper';
+import ChartCard from '@components/ChartCard';
 
 import { PrivateSSP } from '@interfaces/screen';
 import IStoreState from '@interfaces/store';
@@ -18,8 +19,6 @@ import { formatCoin } from '@utils/format';
 
 import { GET_FUNDS } from '@store/types';
 
-import theme from 'src/style/theme';
-
 import {
   NavBar,
   NavRow,
@@ -32,7 +31,8 @@ import {
   NavBadget,
   NavBadgetTitle,
   Title,
-  Coin
+  Coin,
+  FundsSeparator
 } from './styles';
 
 const Home: React.FC<PrivateSSP<'Home'>> = ({ route, navigation }) => {
@@ -131,6 +131,13 @@ const Home: React.FC<PrivateSSP<'Home'>> = ({ route, navigation }) => {
         <Title>
           Funds
         </Title>
+        <FlatList
+          data={fundsInfo.funds}
+          renderItem={({item}) => <ChartCard {...item} />}
+          keyExtractor={item => item.type}
+          ItemSeparatorComponent={() => <FundsSeparator />}
+          horizontal
+        />
       </PageWrapper>
       <FooterBar route={route}/>
     </>

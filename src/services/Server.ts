@@ -43,13 +43,13 @@ window.server = createServer({
           // @ts-ignore
           userId: i.id,
           type: f,
-          price_at_open: getRandomNumber(12, 110, 2),
-          price_at_close: getRandomNumber(13, 120, 2),
+          price_at_open: getRandomNumber(9, 65, 2),
+          price_at_close: getRandomNumber(10, 70, 2),
           aum: getRandomNumber(75, 500, 2),
           vr: "2019 - 2023",
           issue_date: Date.now(),
           ter: getRandomNumber(0.01, 100, 2),
-          credits: getRandomNumber(1, 500, 0),
+          credits: getRandomNumber(5, 30, 0),
           last_purchase: getRandomNumber(
             new Date("2021").getTime(),
             Date.now() - 10000,
