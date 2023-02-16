@@ -1,15 +1,17 @@
 import React from 'react';
-import { StatusBar } from 'expo-status-bar';
-import styled, { ThemeProvider } from 'styled-components/native';
-
-
+import { Provider } from 'react-redux';
+import { ThemeProvider } from 'styled-components/native';
 import * as Font from 'expo-font';
-import theme from './style/theme';
+import { StatusBar } from 'expo-status-bar';
+import Toast from 'react-native-toast-message';
 
 import './services/Server'
-import { Provider } from 'react-redux';
-import { PersistGate } from 'redux-persist/integration/react';
-import store, { persistor } from './store';
+
+import theme from './style/theme';
+
+import store from './store';
+
+import Routes from './routes';
 
 let customFonts = {
   'Sora-100': require('../assets/fonts/Sora-Thin.ttf'),
@@ -20,6 +22,8 @@ let customFonts = {
   'Sora-600': require('../assets/fonts/Sora-SemiBold.ttf'),
   'Sora-700': require('../assets/fonts/Sora-Bold.ttf'),
   'Sora-800': require('../assets/fonts/Sora-ExtraBold.ttf'),
+  'Sintony': require('../assets/fonts/Sintony-Regular.ttf'),
+  'Sitara': require('../assets/fonts/Sitara-Regular.ttf'),
 };
 
 class Index extends React.Component {
@@ -43,11 +47,11 @@ class Index extends React.Component {
     return (
       <ThemeProvider theme={theme}>
         <Provider store={store}>
-          <PersistGate loading={null} persistor={persistor}>
-            <Container>
-              <StatusBar  style='auto'/>
-            </Container>
-          </PersistGate>
+          <>
+            <StatusBar style='auto'/>
+            <Routes/>
+            <Toast/>
+          </>
         </Provider>
       </ThemeProvider>
     );
@@ -55,10 +59,3 @@ class Index extends React.Component {
 }
 
 export default Index
-
-const Container = styled.View`
-  flex: 1;
-  background-color: ${ ({ theme }) => theme.colors.pureWhite };
-  align-items: center;
-  justify-content: center;
-`;
