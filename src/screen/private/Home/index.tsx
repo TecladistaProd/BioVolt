@@ -32,7 +32,15 @@ import {
   NavBadgetTitle,
   Title,
   Coin,
-  FundsSeparator
+  FundsSeparator,
+  Banner,
+  BannerTitle,
+  BannerSubTitle,
+  BannerImage,
+  BannerCol,
+  Row,
+  PlaceholderCard,
+  PlaceholderText
 } from './styles';
 
 const Home: React.FC<PrivateSSP<'Home'>> = ({ route, navigation }) => {
@@ -138,6 +146,29 @@ const Home: React.FC<PrivateSSP<'Home'>> = ({ route, navigation }) => {
           ItemSeparatorComponent={() => <FundsSeparator />}
           horizontal
         />
+        <Banner>
+          <BannerCol>
+            <BannerTitle>
+              Learn more about carbon credits
+            </BannerTitle>
+            <BannerSubTitle>
+              Check out our top tips!
+            </BannerSubTitle>
+          </BannerCol>
+          <BannerImage
+            source={require('@assets/images/bs.png')}
+            resizeMode='cover'
+            resizeMethod='auto'
+          />
+        </Banner>
+        <Row>
+          <PlaceholderCard>
+            <PlaceholderText>
+              Why should you invest here?
+            </PlaceholderText>
+          </PlaceholderCard>
+          <PlaceholderCard/>
+        </Row>
       </PageWrapper>
       <FooterBar route={route}/>
     </>

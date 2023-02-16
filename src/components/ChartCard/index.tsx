@@ -38,8 +38,6 @@ const ChartCard: React.FC<IProps> = ({
     }
   }, [type]);
 
-  console.log('\r\n', type, totalClose, totalOpen, percent)
-
   return (
     <Container onPress={onPress}>
       <Icon width={16} height={16}/>

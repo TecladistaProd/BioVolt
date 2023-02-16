@@ -22,8 +22,6 @@ const Chart: React.FC<IProps> = ({ open, close, width, height }) => {
     [open, close])
   const color = useMemo(() => theme.colors[close > open ? 'secondarySolid' : 'lightCoral'], 
     [open, close]);
-
-  console.log(close, open)
   
   return (
     <Container>

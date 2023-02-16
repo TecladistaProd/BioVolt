@@ -99,3 +99,66 @@ export const Title = styled.Text`
 export const FundsSeparator = styled.View`
   width: 15px;
 `;
+
+export const Banner = styled.View`
+  width: 100%;
+  height: 105px;
+  border-radius: 10px;
+  margin: 20px 0;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  ${({ theme }) => css`
+    background-color: ${theme.colors.primarySolid};
+    padding: 20px;
+  `}
+`;
+
+export const BannerCol = styled.View`
+  width: 60%;
+`;
+
+export const BannerTitle = styled.Text`
+  font-size: 16px;
+  font-family: "Sora-600";
+  margin-bottom: 10px;
+  ${({ theme }) => css`
+    color: ${theme.colors.pureWhite};
+  `}
+`;
+
+export const BannerSubTitle = styled.Text`
+  font-size: 12px;
+  font-family: "Sora-400";
+  ${({ theme }) => css`
+    color: ${theme.colors.pureWhite};
+  `}
+`;
+
+export const BannerImage = styled.Image`
+  width: 94px;
+  height: 87px;
+`;
+
+export const Row = styled.View`
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+  margin-bottom: 20px;
+`;
+
+export const PlaceholderCard = styled.View`
+  width: 154px;
+  height: 210px;
+  border-radius: 10px;
+  padding: 21px 12px;
+  ${({ theme }) => css`
+    background-color: ${theme.colors.gray_1};
+  `}
+`;
+
+export const PlaceholderText = styled.Text`
+  font-size: 12px;
+  font-family: "Sora-600";
+  width: 105px;
+`;
