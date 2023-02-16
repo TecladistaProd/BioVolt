@@ -43,8 +43,8 @@ window.server = createServer({
           // @ts-ignore
           userId: i.id,
           type: f,
-          price_at_open: getRandomNumber(10, 100, 2),
-          price_at_close: getRandomNumber(10, 100, 2),
+          price_at_open: getRandomNumber(12, 110, 2),
+          price_at_close: getRandomNumber(13, 120, 2),
           aum: getRandomNumber(75, 500, 2),
           vr: "2019 - 2023",
           issue_date: Date.now(),
@@ -65,7 +65,6 @@ window.server = createServer({
     this.timing = getRandomNumber(200, 900);
 
     this.post("/signin", async (schema, request) => {
-      await wait(Math.random() * 5);
       const body = JSON.parse(request.requestBody);
       const data = schema.db.users.findBy({ email: body.email });
       if (!data)
@@ -95,7 +94,6 @@ window.server = createServer({
     });
     this.post("/signup", async (schema, request) => {
       const body = JSON.parse(request.requestBody);
-      await wait(Math.random() * 5);
       schema.db.users.insert({ ...body });
       await AsyncStorage.setItem(
         "@biovolt/users",
@@ -109,21 +107,9 @@ window.server = createServer({
         }
       );
     });
-    this.get("/fund", async (schema, request) => {
-      const body = JSON.parse(request.requestBody);
-      await wait(Math.random() * 5);
-      schema.db.users.insert({ ...body });
-      await AsyncStorage.setItem(
-        "@biovolt/users",
-        JSON.stringify(Array.from(schema.db.users))
-      );
-      return new Response(
-        200,
-        {},
-        {
-          message: "User created",
-        }
-      );
+    this.get("/funds", async (schema, request) => {
+      // @ts-ignore
+      return schema.db.funds.filter((i) => i.userId === request.queryParams.id);
     });
   },
 });

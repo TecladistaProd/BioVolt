@@ -1,15 +1,24 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { TouchableOpacity } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+import { useFocusEffect } from '@react-navigation/native';
 
 import FooterBar from '@components/FooterBar';
 import PageWrapper from '@components/PageWrapper';
 
 import { PrivateSSP } from '@interfaces/screen';
+import IStoreState from '@interfaces/store';
 
 import User from '@assets/icons/User.svg';
 import Bell from '@assets/icons/Bell.svg';
 import Up from '@assets/icons/Up.svg';
-import Coin from '@assets/icons/Coin.svg';
+import Down from '@assets/icons/Down.svg';
+
+import { formatCoin } from '@utils/format';
+
+import { GET_FUNDS } from '@store/types';
+
+import theme from 'src/style/theme';
 
 import {
   NavBar,
@@ -22,10 +31,56 @@ import {
   NavValue2,
   NavBadget,
   NavBadgetTitle,
-  Title
+  Title,
+  Coin
 } from './styles';
 
 const Home: React.FC<PrivateSSP<'Home'>> = () => {
+  const dispatch = useDispatch();
+
+  const { id: userId, token } = useSelector<IStoreState, { id: string, token: string }>
+    (state => state.user);
+
+  const { fundsInfo } = useSelector<IStoreState, any>(state => {
+    const funds = state.funds.map(i => {
+      const totalOpen = i.price_at_open * i.credits;
+      const totalClose = i.price_at_close * i.credits;
+      return {
+        type: i.type,
+        totalOpen: formatCoin(totalOpen),
+        totalClose: formatCoin(totalClose),
+        percent: ((totalClose - totalOpen) / totalOpen) * 100
+      }
+    });
+    const fundsOpen = (funds.reduce((acc, i) => acc + 
+      parseFloat(i.totalOpen.replace(',', '')), 0) || 0);
+    const fundsClose = (funds.reduce((acc, i) => acc + 
+      parseFloat(i.totalClose.replace(',', '')), 0) || 0);
+    return {
+      id: state.user.id,
+      token: state.user.token,
+      fundsInfo: {
+        funds: funds,
+        open: formatCoin(fundsOpen),
+        close: formatCoin(fundsClose),
+        percent: ((fundsClose - fundsOpen) / fundsOpen) * 100
+      }
+    }
+  });
+
+  useFocusEffect(useCallback(() => {
+    (async () => {
+      const res = await fetch(`/api/funds?id=${userId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        },
+        method: 'GET'
+      });
+      const json = await res.json()
+      dispatch({ type: GET_FUNDS, payload: json })
+    })()
+  }, [userId, token, dispatch]));
+
   return (
     <>
       <PageWrapper>
@@ -36,7 +91,7 @@ const Home: React.FC<PrivateSSP<'Home'>> = () => {
             </TouchableOpacity>
             <NavRow>
               <NavTitle>
-                Account: $1,457.23
+                Account: ${fundsInfo.close}
               </NavTitle>
               <TouchableOpacity>
                 <ChevronDown width={12} height={12} />
@@ -52,11 +107,17 @@ const Home: React.FC<PrivateSSP<'Home'>> = () => {
           <NavRow>
             <NavValueView>
               <NavValue1>
-                $1,245.23
+                ${fundsInfo.close}
               </NavValue1>
-              <Up width={14} height={14}/>
-              <NavValue2>
-                31.82%
+              {
+                fundsInfo.percent > 0 ? (
+                  <Up width={14} height={14}/>
+                ) : (
+                  <Down width={14} height={14}/>
+                )
+              }
+              <NavValue2 isNegative={fundsInfo.percent <= 0}>
+                {Math.abs(fundsInfo.percent).toFixed(2)}%
               </NavValue2>
             </NavValueView>
             <NavBadget>

@@ -1,5 +1,6 @@
 import styled, { css } from "styled-components/native";
 import ChevronDownIcon from "@assets/icons/ChevronDown.svg";
+import CoinIcon from "@assets/icons/Coin.svg";
 
 export const NavBar = styled.View`
   padding: 12px 0;
@@ -54,11 +55,11 @@ export const NavValue1 = styled.Text`
   `}
 `;
 
-export const NavValue2 = styled.Text`
+export const NavValue2 = styled.Text<{ isNegative: boolean }>`
   font-size: 14px;
   font-family: "Sora-400"
-    ${({ theme }) => css`
-      color: ${theme.colors.secondarySolid};
+    ${({ theme, isNegative }) => css`
+      color: ${theme.colors[isNegative ? "lightCoral" : "secondarySolid"]};
     `};
 `;
 
@@ -71,6 +72,10 @@ export const NavBadget = styled.View`
     background-color: ${theme.colors.primaryLight};
     border-radius: ${theme.radius.sm};
   `};
+`;
+
+export const Coin = styled(CoinIcon)`
+  margin-top: 2px;
 `;
 
 export const NavBadgetTitle = styled.Text`
