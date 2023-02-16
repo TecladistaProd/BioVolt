@@ -20,6 +20,7 @@ window.server = createServer({
       last_name: "Doe",
       email: "john_doe@gmail.com",
       password: "12345678",
+      accept_terms: true,
     });
   },
 

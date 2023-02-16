@@ -2,7 +2,9 @@ import React from 'react';
 import { enableFreeze } from 'react-native-screens';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Login from './screen/public/SignIn';
+
+import SignIn from './screen/public/SignIn';
+import SignUp from '@screen/public/SignUp';
 
 enableFreeze(true);
 
@@ -15,8 +17,9 @@ const Routes: React.FC = () => {
         screenOptions={{
           headerShown: false
         }}
-        initialRouteName="Login">
-        <Stack.Screen name="Login" component={Login} />
+        initialRouteName="SignIn">
+        <Stack.Screen name="SignIn" component={SignIn} />
+        <Stack.Screen name="SignUp" component={SignUp} />
       </Stack.Navigator>
     </NavigationContainer>
   );

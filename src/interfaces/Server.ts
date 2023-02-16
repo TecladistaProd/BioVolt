@@ -6,4 +6,5 @@ export interface IUserModel
     last_name: string;
     password: string;
     email: string;
+    accept_terms: boolean;
   }> {}
