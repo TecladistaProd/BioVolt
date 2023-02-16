@@ -1,7 +1,7 @@
 import { combineReducers } from "@reduxjs/toolkit";
 
-import template from "./template";
+import user from "./user";
 
 export default combineReducers({
-  template,
+  user,
 });
