@@ -54,6 +54,7 @@ const Home: React.FC<PrivateSSP<'Home'>> = ({ route, navigation }) => {
       const totalOpen = i.price_at_open * i.credits;
       const totalClose = i.price_at_close * i.credits;
       return {
+        id: i.id,
         type: i.type,
         totalOpen: formatCoin(totalOpen),
         totalClose: formatCoin(totalClose),
@@ -141,7 +142,7 @@ const Home: React.FC<PrivateSSP<'Home'>> = ({ route, navigation }) => {
         </Title>
         <FlatList
           data={fundsInfo.funds}
-          renderItem={({item}) => <ChartCard {...item} />}
+          renderItem={({item}) => <ChartCard {...item} navigation={navigation} />}
           keyExtractor={item => item.type}
           ItemSeparatorComponent={() => <FundsSeparator />}
           horizontal
