@@ -35,7 +35,7 @@ import {
   Coin
 } from './styles';
 
-const Home: React.FC<PrivateSSP<'Home'>> = () => {
+const Home: React.FC<PrivateSSP<'Home'>> = ({ route, navigation }) => {
   const dispatch = useDispatch();
 
   const { id: userId, token } = useSelector<IStoreState, { id: string, token: string }>
@@ -132,7 +132,7 @@ const Home: React.FC<PrivateSSP<'Home'>> = () => {
           Funds
         </Title>
       </PageWrapper>
-      <FooterBar/>
+      <FooterBar route={route}/>
     </>
   );
 }
