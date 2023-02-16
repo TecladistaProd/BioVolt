@@ -1,8 +1,12 @@
-import styled from "styled-components/native";
+import styled, { css } from "styled-components/native";
 
 export const Container = styled.View`
   width: 100%;
-  margin-top: auto;
+  ${({ theme }) => css`
+    background-color: ${theme.colors.pureWhite};
+    border-bottom-width: 1px;
+    border-bottom-color: ${theme.colors.gray_1};
+  `}
 `;
 
 export const Text = styled.Text``;
