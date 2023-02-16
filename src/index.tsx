@@ -3,6 +3,7 @@ import { Provider } from 'react-redux';
 import { ThemeProvider } from 'styled-components/native';
 import * as Font from 'expo-font';
 import { StatusBar } from 'expo-status-bar';
+import Toast from 'react-native-toast-message';
 
 import './services/Server'
 
@@ -49,6 +50,7 @@ class Index extends React.Component {
           <>
             <StatusBar style='auto'/>
             <Routes/>
+            <Toast/>
           </>
         </Provider>
       </ThemeProvider>

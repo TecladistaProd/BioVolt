@@ -1,4 +1,5 @@
 import React, { useCallback } from 'react';
+import { useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
 
 import signinSchema from '@yupSchemas/signin.schema';
@@ -8,15 +9,31 @@ import Input from '@components/Input';
 import Button from '@components/Button';
 
 import { Title, SignupRow, SignupText, SignupBtn } from './styles';
+import { LOGIN_USER } from '@store/types';
+import Toast from 'react-native-toast-message';
 
 const Login: React.FC = () => {
+  const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
       email: '',
       password: '',
     },
     validationSchema: signinSchema,
-    onSubmit: (data) => {}
+    onSubmit: async (data) => {
+      const res = await fetch('/api/signin', {
+        method: 'POST',
+        body: JSON.stringify(data)
+      });
+      const json = await res.json();
+      if(json.message) {
+        return Toast.show({
+          type: 'error',
+          text1: json.message,
+        });
+      }
+      dispatch({ type: LOGIN_USER, payload: res });
+    }
   });
 
   const handleChangeInput = useCallback((name: string, value: string) => {
