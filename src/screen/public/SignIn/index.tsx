@@ -11,11 +11,11 @@ import Button from '@components/Button';
 
 import { SIGNIN_USER } from '@store/types';
 
-import { TStackScreenProps } from '@interfaces/screen';
+import { PublicSSP } from '@interfaces/screen';
 
 import { Title, SignupRow, SignupText, SignupBtn } from './styles';
 
-const SignIn: React.FC<TStackScreenProps<'SignIn'>> = ({ navigation }) => {
+const SignIn: React.FC<PublicSSP<'SignIn'>> = ({ navigation }) => {
   const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
@@ -35,7 +35,7 @@ const SignIn: React.FC<TStackScreenProps<'SignIn'>> = ({ navigation }) => {
           text1: json.message,
         });
       }
-      dispatch({ type: SIGNIN_USER, payload: res });
+      dispatch({ type: SIGNIN_USER, payload: json });
     }
   });
 
@@ -51,6 +51,7 @@ const SignIn: React.FC<TStackScreenProps<'SignIn'>> = ({ navigation }) => {
       <Input
         label='E-mail'
         placeholder='example@email.com'
+        autoComplete='email'
         mb='20px'
         type='emailAddress'
         error={formik.errors.email}

@@ -9,7 +9,7 @@ import Input from '@components/Input';
 import Button from '@components/Button';
 import Checkbox from '@components/Checkbox';
 
-import { TStackScreenProps } from '@interfaces/screen';
+import { PublicSSP } from '@interfaces/screen';
 
 import {
   Title,
@@ -23,7 +23,7 @@ import {
   TermsTextBold
 } from './styles';
 
-const SignUp: React.FC<TStackScreenProps<'SignUp'>> = ({ navigation }) => {
+const SignUp: React.FC<PublicSSP<'SignUp'>> = ({ navigation }) => {
   const formik = useFormik({
     initialValues: {
       first_name: '',
@@ -33,7 +33,18 @@ const SignUp: React.FC<TStackScreenProps<'SignUp'>> = ({ navigation }) => {
       accept_terms: false,
     },
     validationSchema: signupSchema,
-    onSubmit: async (data) => {}
+    onSubmit: async (data) => {
+      const res = await fetch('/api/signup', {
+        method: 'POST',
+        body: JSON.stringify(data)
+      });
+      const json = await res.json();
+      if(json.message) {
+        navigation.navigate('Message', {
+          message: json.message
+        })
+      }
+    }
   });
 
   const handleChangeInput = useCallback((name: keyof typeof formik.values, value: string | boolean) => {
@@ -57,6 +68,7 @@ const SignUp: React.FC<TStackScreenProps<'SignUp'>> = ({ navigation }) => {
       <Input
         label='First Name'
         placeholder='John'
+        autoCapitalize='words'
         mb='20px'
         type='name'
         error={formik.errors.first_name}
@@ -66,6 +78,7 @@ const SignUp: React.FC<TStackScreenProps<'SignUp'>> = ({ navigation }) => {
       <Input
         label='Last Name'
         placeholder='doe'
+        autoCapitalize='words'
         mb='20px'
         type='name'
         error={formik.errors.last_name}
@@ -75,6 +88,7 @@ const SignUp: React.FC<TStackScreenProps<'SignUp'>> = ({ navigation }) => {
       <Input
         label='E-mail'
         placeholder='example@email.com'
+        autoComplete='email'
         mb='20px'
         type='emailAddress'
         error={formik.errors.email}
