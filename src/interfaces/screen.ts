@@ -13,6 +13,8 @@ export type PublicSSP<T extends keyof PublicStackParamList> =
 
 export type PrivateStackParamList = {
   Home: undefined;
+  Trade: undefined;
+  Portfolio: undefined;
   FundDetails: {
     id: string;
   };

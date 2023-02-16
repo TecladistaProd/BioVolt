@@ -170,7 +170,7 @@ const Home: React.FC<PrivateSSP<'Home'>> = ({ route, navigation }) => {
           <PlaceholderCard/>
         </Row>
       </PageWrapper>
-      <FooterBar route={route}/>
+      <FooterBar navigation={navigation} route={route}/>
     </>
   );
 }
