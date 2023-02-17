@@ -3,8 +3,8 @@ import { AnyAction } from "@reduxjs/toolkit";
 import { SIGNIN_USER } from "../types";
 
 const INITIAL_STATE: IUserReducer = {
-  id: "1",
-  token: "askdnasjnjnwe anjnasjnajnasaskdnajks adnasn",
+  id: "",
+  token: "",
   email: "",
   first_name: "",
   last_name: "",
