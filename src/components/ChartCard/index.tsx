@@ -11,13 +11,15 @@ import Sun from '@assets/icons/Sun.svg';
 import Nature from '@assets/icons/Nature.svg';
 
 import { Container, Title, BottomInfo, BottomPercent, BottomValue } from './styles';
+import { PrivateSSP } from '@interfaces/screen';
 
 interface IProps {
   type: TFundType;
+  id: string;
   totalOpen: string;
   totalClose: string;
   percent: number;
-  onPress?: () => void;
+  navigation: PrivateSSP<'Home'>['navigation'];
 }
 
 const ChartCard: React.FC<IProps> = ({
@@ -25,7 +27,8 @@ const ChartCard: React.FC<IProps> = ({
   totalOpen,
   totalClose,
   percent,
-  onPress
+  navigation,
+  id
 }) => {
   const Icon = useMemo(() => {
     switch(type) {
@@ -39,7 +42,7 @@ const ChartCard: React.FC<IProps> = ({
   }, [type]);
 
   return (
-    <Container onPress={onPress}>
+    <Container onPress={navigation.navigate.bind(null, 'FundDetails', { id })}>
       <Icon width={16} height={16}/>
       <Title>
         {`${type} Fund`}

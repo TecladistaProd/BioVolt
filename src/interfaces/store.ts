@@ -10,6 +10,7 @@ export interface IUserReducer {
 }
 
 export interface IFundReducer {
+  id: string;
   type: TFundType;
   price_at_open: number;
   price_at_close: number;

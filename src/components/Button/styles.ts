@@ -5,19 +5,22 @@ export interface ICProps {
   bgColor: keyof typeof theme.colors;
   mt?: string;
   mb?: string;
+  width?: string;
+  bColor?: keyof typeof theme.colors;
 }
 
 export const Container = styled.TouchableOpacity<ICProps>`
-  width: 100%;
   height: 58px;
   align-items: center;
   justify-content: center;
   flex-direction: row;
-  ${({ theme, bgColor, mb, mt }) => css`
+  ${({ theme, bgColor, mb, mt, width, bColor }) => css`
     background-color: ${theme.colors[bgColor]};
     border-radius: ${theme.radius.sm};
     margin-top: ${mt || 0};
     margin-bottom: ${mb || 0};
+    width: ${width || "100%"};
+    border: 1px solid ${bColor ? theme.colors[bColor] : "transparent"};
   `}
 `;
 
