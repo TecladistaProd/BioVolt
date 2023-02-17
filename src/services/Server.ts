@@ -71,25 +71,7 @@ window.server = createServer({
     this.post("/signup", async (schema, request) => {
       const body = JSON.parse(request.requestBody);
       const user = schema.db.users.insert({ ...body });
-      funds.forEach((f) =>
-        schema.db.funds.insert({
-          // @ts-ignore
-          userId: user.id,
-          type: f,
-          price_at_open: getRandomNumber(9, 65, 2),
-          price_at_close: getRandomNumber(10, 70, 2),
-          aum: getRandomNumber(75, 500, 2),
-          vr: "2019 - 2023",
-          issue_date: Date.now(),
-          ter: getRandomNumber(0.01, 100, 2),
-          credits: getRandomNumber(5, 30, 0),
-          last_purchase: getRandomNumber(
-            new Date("2021").getTime(),
-            Date.now() - 10000,
-            0
-          ),
-        })
-      );
+
       await AsyncStorage.setItem(
         "@biovolt/users",
         JSON.stringify(Array.from(schema.db.users))
