@@ -5,6 +5,7 @@ import { IUserModel, IFundModel, TFundType } from "@interfaces/Server";
 
 import { wait } from "@utils/timing";
 import { getRandomNumber } from "@utils/generator";
+import { BDs } from "./mock";
 
 if (window.server) {
   window.server.shutdown();
@@ -110,6 +111,9 @@ window.server = createServer({
     this.get("/funds", async (schema, request) => {
       // @ts-ignore
       return schema.db.funds.filter((i) => i.userId === request.queryParams.id);
+    });
+    this.get("/bds", () => {
+      return BDs;
     });
   },
 });
