@@ -1,7 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { View, TouchableOpacity } from 'react-native';
-import { RootStackParamList } from 'src/interfaces/screen';
 
 import Left from '../../../assets/icons/Left.svg';
 

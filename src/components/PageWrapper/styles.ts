@@ -7,7 +7,7 @@ export const Container = styled(SafeAreaView)`
 `;
 
 export const NavBar = styled.View`
-  height: 51px;
+  min-height: 51px;
   width: 100%;
   flex-direction: row;
   align-items: center;

@@ -8,3 +8,5 @@ export interface IUserModel
     email: string;
     accept_terms: boolean;
   }> {}
+
+export type TFundType = "Wind" | "Solar" | "Nature";

@@ -9,7 +9,8 @@
       "@yupSchemas/*": ["./src/yupSchemas/*"],
       "@screen/*": ["./src/screen/*"],
       "@store/*": ["./src/store/*"],
-      "@interfaces/*": ["./src/interfaces/*"]
+      "@interfaces/*": ["./src/interfaces/*"],
+      "@utils/*": ["./src/utils/*"]
     }
   }
 }
