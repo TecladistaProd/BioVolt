@@ -60,3 +60,10 @@ export const SignInBtn = styled.TouchableOpacity`
   border-bottom-width: ${StyleSheet.hairlineWidth}px;
   border-bottom-color: ${({ theme }) => theme.colors.pureBlack};
 `;
+
+export const ErrorTerms = styled.Text`
+  color: ${({ theme }) => theme.colors.lightCoral};
+  font-size: 11px;
+  margin-bottom: 2px;
+  margin-top: 2px;
+`;
