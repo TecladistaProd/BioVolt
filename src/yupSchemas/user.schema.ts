@@ -14,5 +14,5 @@ export const signinSchema = Yup.object().shape({
 export const signupSchema = signinSchema.shape({
   first_name: Yup.string().required(REQUIRED_FIELD),
   last_name: Yup.string().required(REQUIRED_FIELD),
-  accept_terms: Yup.boolean().required(REQUIRED_FIELD),
+  accept_terms: Yup.boolean().required(REQUIRED_FIELD).isTrue(REQUIRED_FIELD),
 });

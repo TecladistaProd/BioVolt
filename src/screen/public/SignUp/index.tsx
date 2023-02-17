@@ -20,7 +20,8 @@ import {
   Dash,
   TermsRow,
   TermsText,
-  TermsTextBold
+  TermsTextBold,
+  ErrorTerms
 } from './styles';
 
 const SignUp: React.FC<PublicSSP<'SignUp'>> = ({ navigation }) => {
@@ -114,6 +115,9 @@ const SignUp: React.FC<PublicSSP<'SignUp'>> = ({ navigation }) => {
           <TermsTextBold>Terms of Service</TermsTextBold> and <TermsTextBold>Privacy policy.</TermsTextBold>
         </TermsText>
       </TermsRow>
+      <ErrorTerms>
+        {formik.errors.accept_terms}
+      </ErrorTerms>
       <Button
         onPress={formik.handleSubmit}
         mt='32px'
