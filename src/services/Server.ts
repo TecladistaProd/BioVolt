@@ -1,11 +1,12 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { createServer, Model, Response, belongsTo } from "miragejs";
+import { createServer, Model, Response } from "miragejs";
 
-import { IUserModel, IFundModel, TFundType } from "@interfaces/Server";
+import { IUserModel, TFundType } from "@interfaces/Server";
 
-import { wait } from "@utils/timing";
 import { getRandomNumber } from "@utils/generator";
 import { BDs } from "./mock";
+
+const funds: Array<TFundType> = ["Nature", "Solar", "Wind"];
 
 if (window.server) {
   window.server.shutdown();
@@ -28,37 +29,11 @@ const usersMock = async () => {
 window.server = createServer({
   models: {
     user: Model as IUserModel,
-    fund: Model.extend({
-      user: belongsTo(),
-    }) as IFundModel,
   },
 
   async seeds(server) {
     const users = await usersMock();
     users.forEach((i: any) => server.create("user", i));
-    server.db.users.forEach((i) => {
-      const funds: Array<TFundType> = ["Nature", "Solar", "Wind"];
-
-      funds.forEach((f) =>
-        server.create("fund", {
-          // @ts-ignore
-          userId: i.id,
-          type: f,
-          price_at_open: getRandomNumber(9, 65, 2),
-          price_at_close: getRandomNumber(10, 70, 2),
-          aum: getRandomNumber(75, 500, 2),
-          vr: "2019 - 2023",
-          issue_date: Date.now(),
-          ter: getRandomNumber(0.01, 100, 2),
-          credits: getRandomNumber(5, 30, 0),
-          last_purchase: getRandomNumber(
-            new Date("2021").getTime(),
-            Date.now() - 10000,
-            0
-          ),
-        })
-      );
-    });
   },
 
   routes() {
@@ -95,7 +70,26 @@ window.server = createServer({
     });
     this.post("/signup", async (schema, request) => {
       const body = JSON.parse(request.requestBody);
-      schema.db.users.insert({ ...body });
+      const user = schema.db.users.insert({ ...body });
+      funds.forEach((f) =>
+        schema.db.funds.insert({
+          // @ts-ignore
+          userId: user.id,
+          type: f,
+          price_at_open: getRandomNumber(9, 65, 2),
+          price_at_close: getRandomNumber(10, 70, 2),
+          aum: getRandomNumber(75, 500, 2),
+          vr: "2019 - 2023",
+          issue_date: Date.now(),
+          ter: getRandomNumber(0.01, 100, 2),
+          credits: getRandomNumber(5, 30, 0),
+          last_purchase: getRandomNumber(
+            new Date("2021").getTime(),
+            Date.now() - 10000,
+            0
+          ),
+        })
+      );
       await AsyncStorage.setItem(
         "@biovolt/users",
         JSON.stringify(Array.from(schema.db.users))
@@ -108,9 +102,22 @@ window.server = createServer({
         }
       );
     });
-    this.get("/funds", async (schema, request) => {
-      // @ts-ignore
-      return schema.db.funds.filter((i) => i.userId === request.queryParams.id);
+    this.get("/funds", async () => {
+      return funds.map((f) => ({
+        type: f,
+        price_at_open: getRandomNumber(9, 65, 2),
+        price_at_close: getRandomNumber(10, 70, 2),
+        aum: getRandomNumber(75, 500, 2),
+        vr: "2019 - 2023",
+        issue_date: Date.now(),
+        ter: getRandomNumber(0.01, 100, 2),
+        credits: getRandomNumber(5, 30, 0),
+        last_purchase: getRandomNumber(
+          new Date("2021").getTime(),
+          Date.now() - 10000,
+          0
+        ),
+      }));
     });
     this.get("/bds", () => {
       return BDs;

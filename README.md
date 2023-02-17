@@ -21,6 +21,6 @@ Developed by [Vitor Silva](https://www.linkedin.com/in/vitor-s-1403b4134/)
 First you should clone repository in your machine, with node and npm installed, go to project folder in terminal and use these commands:
 
 ```sh
-npm install
-npm start
+  npm install
+  npm start
 ```
